@@ -1,0 +1,11 @@
+---
+AllCops:
+  TargetRubyVersion: 2.3
+
+Metrics/LineLength:
+  Max: 120
+
+GlobalVars:
+  AllowedVariables:
+    - $dont_load_spec_helper
+    - $dont_load_rake_tasks

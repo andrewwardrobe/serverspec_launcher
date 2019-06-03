@@ -1,0 +1,79 @@
+---
+options:
+  fail_on_err: true
+  formatters:
+    - tick
+  color: true
+
+targets:
+  exec-example:
+    backend: exec
+    spec_type: integration/example
+
+  docker-example:
+    backend: docker
+    docker_image: alpine:latest
+    spec_type: integration/docker
+
+  ssh-example:
+    backend: ssh
+    hosts:
+      - 172.18.0.22
+      - 172.18.0.23
+    user: root
+    spec_type: integration/ssh
+    identity_file: spec/resources/ssh.rsa
+    verify_host_key: never
+
+  inspec-agent-example:
+    backend: inspec
+    control: spec/integration/inspec_spec.rb
+    ssh_port: 22
+    user: root
+    hosts:
+      - 172.18.0.22
+    auth_method: agent
+    attach_to:
+      - test_network
+
+  inspec-ssh-example:
+    backend: inspec
+    control: spec/integration/inspec_spec.rb
+    ssh_port: 22
+    user: root
+    hosts:
+      - 172.18.0.22
+    auth_method: ssh-keys
+    keyfile: spec/resources/ssh.rsa
+    attach_to:
+      - test_network
+
+  inspec-password-example:
+    backend: inspec
+    control: spec/integration/inspec_spec.rb
+    user: root
+    password: root
+    hosts:
+      - 172.18.0.22
+    auth_method: password
+    attach_to:
+      - test_network
+    formatters:
+      - json
+
+
+environments:
+    env:
+      targets:
+        env_target:
+          backend: ssh
+          hosts:
+            - testenv01
+            - testenv02
+          spec_type: integration/example
+
+        env_target2:
+          backend: ssh
+          hosts: testenv01
+          spec_type: integration/example
+

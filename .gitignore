@@ -1,0 +1,15 @@
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+.idea/
+reports/
+
+spec/resources/*.rsa
+spec/resources/*.rsa.pub
