@@ -31,14 +31,18 @@ class ServerspecLauncherRakeTasks
 
     namespace :serverspec do
       targets = @properties[:targets] || {}
+      environments = @properties[:environments] || {}
       desc 'Run all targets and environments'
-      task all: targets.keys.map { |key| 'serverspec:' + key.to_s.split('.')[0] }
+
+      task all: targets.keys.map { |key| 'serverspec:' + key.to_s.split('.')[0] }.concat(environments.keys.map {|key| 'serverspec:' + key.to_s.split('.')[0]  })
       targets.keys.each do |key|
         target = targets[key]
         process_target(key, target)
       end
+      puts
 
-      environments = @properties[:environments] || {}
+
+
       environments.keys.each do |key|
         desc "Run all tasks in environment #{key}"
         task key.to_sym => "serverspec:#{key}:all"
