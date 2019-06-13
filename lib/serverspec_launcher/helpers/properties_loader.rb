@@ -11,16 +11,19 @@ class PropertiesLoader
     @raw_properties =  if properties.is_a? Hash
       properties.deep_symbolize_keys
     elsif properties.is_a? String
-      YAML.safe_load expand_env_vars(properties), symbolize_names: true
+      YAML.safe_load(expand_env_vars(properties)).deep_symbolize_keys
     else
       str = File.read('properties.yml')
-      YAML.safe_load expand_env_vars(str), symbolize_names: true
+      YAML.safe_load(expand_env_vars(str)).deep_symbolize_keys
     end
   end
 
   def expand_env_vars(text)
     text.gsub /\${([^}]+)}/ do
-      ENV[$1]
+      data = $1.split(/:[-=]/)
+      var_name = data[0]
+      var_default = data[1]
+      ENV[var_name] || var_default
     end
   end
 

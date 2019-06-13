@@ -43,18 +43,20 @@ module PropertiesHelper
 
   def default_properties_yaml
     <<~HEREDOC
-    ---  
-    targets:
-      target1:
-        backend: exec
-        variables: 
-          leek: meek
-    variables: 
-      var1: $VAR1
-      var2: ${VAR2}
-      var3: \$VAR3
-
-      
+      ---
+      targets:
+        target1:
+          backend: exec
+          variables: 
+            leek: meek
+      variables: 
+        var1: $VAR1
+        var2: ${VAR2}
+        var3: \$VAR3
+        var4: ${VAR4:-default}
+        var5: ${VAR5:-default}
+        var6: ${VAR6:=default}
+        var7: ${VAR7:=default}
 
     HEREDOC
   end
