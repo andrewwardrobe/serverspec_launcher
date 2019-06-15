@@ -63,17 +63,17 @@ targets:
 
 
 environments:
-    env:
-      targets:
-        env_target:
-          backend: ssh
-          hosts:
-            - testenv01
-            - testenv02
-          spec_type: integration/example
+  env:
+    targets:
+      env_target:
+        backend: ssh
+        hosts:
+          - testenv01
+          - testenv02
+        spec_type: integration/example
 
-        env_target2:
-          backend: ssh
-          hosts: testenv01
-          spec_type: integration/example
+      env_target2:
+        backend: ssh
+        hosts: testenv01
+        spec_type: integration/example
 

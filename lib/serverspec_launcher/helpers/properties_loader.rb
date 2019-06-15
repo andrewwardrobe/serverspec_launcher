@@ -8,12 +8,14 @@ class PropertiesLoader
   end
 
   def load(properties)
+
     @raw_properties =  if properties.is_a? Hash
       properties.deep_symbolize_keys
     elsif properties.is_a? String
       YAML.safe_load(expand_env_vars(properties)).deep_symbolize_keys
     else
-      str = File.read('properties.yml')
+      properties_file = ENV['SERVERSPEC_CONFIG'] || 'properties.yml'
+      str = File.read(properties_file)
       YAML.safe_load(expand_env_vars(str)).deep_symbolize_keys
     end
   end
