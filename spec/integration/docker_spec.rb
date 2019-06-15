@@ -3,7 +3,8 @@ require 'serverspec_launcher/spec_helper'
 
 
 context 'Docker Example' do
-  describe package('busybox') do
-    it { should be_installed }
+  describe file('/tmp') do
+    it { should exist }
+    it { should be_a_directory }
   end
 end
