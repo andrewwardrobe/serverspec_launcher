@@ -9,6 +9,9 @@ targets:
   exec-example:
     backend: exec
     spec_type: integration/example
+    formatters:
+      - launcher
+      - tick
 
   docker-example:
     backend: docker

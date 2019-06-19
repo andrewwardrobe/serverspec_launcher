@@ -103,7 +103,10 @@ class LauncherJsonFormatter < RSpec::Core::Formatters::BaseFormatter
         :run_time => example.execution_result.run_time,
         :pending_message => example.execution_result.pending_message,
         :resource => example.example_group.description,
-        :context => get_tree(example)
+        :context => get_tree(example),
+        :metadata => example.metadata,
+        :tags => example.metadata[:tags],
+        :type => example.metadata[:type]
     }
   end
 

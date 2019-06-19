@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'serverspec_launcher/version'
+require 'serverspec_launcher/helpers/reshaper'
 require 'serverspec_launcher/generators/properties_generator'
 require 'serverspec_launcher/generators/rakefile_generator'
 require 'serverspec_launcher/generators/spec_helper_generator'
@@ -9,6 +10,7 @@ require 'serverspec_launcher/generators/gemspec_generator'
 
 # Main Class
 module ServerspecLauncher
+
   def self.generate_properties
     properties = PropertiesGenerator.new
     properties.generate
@@ -93,6 +95,9 @@ module ServerspecLauncher
       init
     when 'version'
       puts "Serverspec Launcher version #{ServerspecLauncher::VERSION}"
+    when 'reshape'
+
+      ReShaper.reshape_report args[0]
     end
 
   end
