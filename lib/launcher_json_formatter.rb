@@ -106,6 +106,7 @@ class LauncherJsonFormatter < RSpec::Core::Formatters::BaseFormatter
         :context => get_tree(example),
         :metadata => example.metadata,
         :tags => example.metadata[:tags],
+        :report_tags => example.metadata[:report_tags],
         :type => example.metadata[:type]
     }
   end
