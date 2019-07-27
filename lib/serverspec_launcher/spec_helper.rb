@@ -139,7 +139,19 @@ class SpecHelper
 
     old_dir = Dir.pwd
     Dir.chdir(vagrant_dir) if vagrant_dir
-    `vagrant up #{@host}`
+    reprovision = @target_properties[:vagrant_reprovision] ? '--provision' : ''
+    vagrant_up = "vagrant up #{@host} #{reprovision}"
+    if @target_properties[:vagrant_output]
+      Open3.popen2e vagrant_up do |_stdin, stdout_and_stderr, _wait_thr|
+        while (line = stdout_and_stderr.gets) do
+          puts line
+        end
+      end
+    elsif @target_properties[:vagrant_errors]
+      system(vagrant_up, out: File::NULL)
+    else
+      system(vagrant_up, out: File::NULL, err: File::NULL)
+    end
 
     config = Tempfile.new('', Dir.tmpdir)
     config.write(`vagrant ssh-config #{@host}`)

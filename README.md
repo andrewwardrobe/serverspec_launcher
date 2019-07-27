@@ -352,6 +352,10 @@ targets:
   # Run tests against a vagrant file
   vagrant-example:
     backend: vagrant
+    #Show output from vagrant up (default: false)
+    vagrant_output: true
+    #reprovision running vagrant box (default: false)
+    vagrant_reprovision: true
     roles:
     - debug::environment_vars
     environment:

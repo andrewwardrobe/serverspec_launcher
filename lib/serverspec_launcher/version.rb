@@ -1,4 +1,4 @@
 # frozen_string_literal: true
 module ServerspecLauncher
-  VERSION = '0.7.1'
+  VERSION = '0.8.0'
 end
